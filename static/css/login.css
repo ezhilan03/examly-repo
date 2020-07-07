@@ -1,0 +1,16 @@
+.main{
+    margin:auto;
+    width:400px;
+    margin-top: 20px;
+}
+.main > img{
+    width: 400px;
+}
+.details{
+    margin:30px;
+    margin-top: 160px;
+    margin-left: 77px;
+}
+.row{
+    margin:20px;    
+}

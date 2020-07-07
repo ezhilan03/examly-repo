@@ -1,0 +1,123 @@
+.topnav{    
+    overflow: hidden;
+    list-style-type: none;
+    height: 57px;
+    background-color: #faf5f5;
+    position: relative;
+    top: -10px;
+    left: -9px;
+    width: 101%;
+    display: block;
+}
+#logo{
+    height: 50px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.topnav > a{
+    display: inline-block;
+    float:left;
+    position: relative;
+}
+#user, #bell{
+    height: 45px;
+    margin: 0px 10px;
+    margin-top: 6px;
+}
+.topnav > div > a{
+    display: inline-block;
+    float:right;
+    position: relative;
+} 
+.topnav > div > a > a{
+    display: block;;
+}
+#bell{
+    height: 27px;
+    margin-top: 14px;
+    margin-right: 17px;
+}
+.profile_details{
+    width:200px;
+    margin:auto;
+    margin-top:30px;
+}
+.profile_details > p {
+    margin:10px;
+}
+.profile_details > img{
+    height: 150px;
+    width: 140px;
+    margin-bottom:15px;
+}
+
+.profile_trigger_dropdown{
+    display: inline-block;
+    float: right;
+    border: 1px solid #ebe4e4;
+    background: #fff;
+    padding: 4px;
+    width: 90px;
+    margin-right: 10px;
+    height: 20px;
+    border-radius: 10px;
+    text-align: -webkit-center;
+    display: none;
+}
+.profile_trigger_dropdown2{
+    display: inline-block;
+    float: right;
+    border: 1px solid #ebe4e4;
+    background: #fff;
+    padding: 4px;
+    width: 340px;
+    margin-right: 20px;
+    height: 360px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 10px;
+    display: none;
+}
+.profile_trigger_dropdown.active, .profile_trigger_dropdown2.active{
+    display:inline-block ;
+}
+.profile_trigger_dropdown > a{
+    text-decoration: none;
+    display: block;
+    color: #333;
+    text-shadow: none;
+}
+.profile_trigger_dropdown2 > div > a{
+    text-decoration: none;
+    font-size: medium;
+    display: block;
+    color: #333;
+    text-shadow: none;
+    margin: 5px 0px;
+    padding: 10px 0px;
+    height: 22px;
+    padding-left: 10px;
+}
+.profile_trigger_dropdown2 > div > a:hover{
+    background:#f5fdff;
+}
+.profile_trigger_dropdown2 > h2{
+    margin: 15px 10px;
+}
+.profile_trigger_dropdown2 > div > h4{
+    margin-bottom: 0px;
+    margin-left: 8px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    scroll-behavior: smooth !important;
+}
+::-webkit-scrollbar-track {
+    background: #fcfcfc; 
+}
+::-webkit-scrollbar-thumb {
+    background: #cccaca;
+    outline: 1px solid slategrey;
+    border-radius: 10px; 
+}

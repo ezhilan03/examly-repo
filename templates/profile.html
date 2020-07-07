@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/profile.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="/static/js/profile.js"></script>
+        <title>Login page</title>
+    </head>
+
+    <body>
+        <div class="topnav">
+            <a><img id="logo" src="static/logo.png"></a>
+            <div>
+                <a href='#' data-trigger="dropdown1"><img id="user" src="/static/user.png"></a>
+                <a href='#' data-trigger="dropdown2"><img id="bell" src="/static/bell.png"></a>
+            </div>
+        </div>
+        <div class="profile_trigger_dropdown">
+            <a href="{{ url_for('index_show')  }}">Log out </a>
+        </div>
+        <div class="profile_trigger_dropdown2">
+            <h2>Notifications</h2>
+            <div class="new">
+                <h4>New</h4>
+                {% if new is defined %}
+                {% for msg in new %}
+                <a href='#'>{{ msg.message }}</a>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="older">
+                <h4>Earlier</h4>
+                {% if old is defined %}
+                {% for msg in old %}
+                <a href='#'>{{ msg.message }}</a>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="profile_details">
+            <img src="/static/person4.png">
+            <p>Name:  {{ detail['name'] }}</p>
+            <p>Userid:  {{ detail['user_id'] }}</p>
+            <p>College:  {{ detail['college'] }}</p>
+            <p>Class:  {{ detail['class'] }}</p>
+            <p>cgpa:  {{ detail['cgpa'] }}</p>
+        </div>
+    </body>
+</html>
