@@ -109,6 +109,20 @@
     margin-left: 8px;
 }
 
+.topnav > div >a.unread_count{
+    display: inline-block;
+    position: absolute;
+    right: 72px;
+    top: 4px;
+}
+.unread_count > span{
+    font-size: medium;
+    background: #fc493d;
+    color: #fff;
+    padding: 3px 6px;
+    border-radius: 20px;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
     scroll-behavior: smooth !important;

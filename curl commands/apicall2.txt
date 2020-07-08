@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" -d "{\"class_name\":\"A\",\"message_list\":[ \"Students please enroll for C course\", \"Hello Students\" ]}"  http://127.0.0.1:5000/apicall2

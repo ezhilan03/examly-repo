@@ -14,6 +14,9 @@
             <a><img id="logo" src="static/logo.png"></a>
             <div>
                 <a href='#' data-trigger="dropdown1"><img id="user" src="/static/user.png"></a>
+                {% if unread_count>0 %}
+                <a class="unread_count"><span>{{ unread_count }}</span></a>
+                {% endif %}
                 <a href='#' data-trigger="dropdown2"><img id="bell" src="/static/bell.png"></a>
             </div>
         </div>
@@ -26,7 +29,7 @@
                 <h4>New</h4>
                 {% if new is defined %}
                 {% for msg in new %}
-                <a href='#'>{{ msg.message }}</a>
+                <a attribute href='#'>{{ msg.message }}</a>
                 {% endfor %}
                 {% endif %}
             </div>
@@ -44,7 +47,7 @@
             <p>Name:  {{ detail['name'] }}</p>
             <p>Userid:  {{ detail['user_id'] }}</p>
             <p>College:  {{ detail['college'] }}</p>
-            <p>Class:  {{ detail['class'] }}</p>
+            <p>Class:  {{ detail['class_name'] }}</p>
             <p>cgpa:  {{ detail['cgpa'] }}</p>
         </div>
     </body>
