@@ -13,11 +13,11 @@
         <div class="topnav">
             <a><img id="logo" src="static/logo.png"></a>
             <div>
-                <a href='#' data-trigger="dropdown1"><img id="user" src="/static/user.png"></a>
+                <a  data-trigger="dropdown1"><img id="user" src="/static/user.png"></a>
                 {% if unread_count>0 %}
                 <a class="unread_count"><span>{{ unread_count }}</span></a>
                 {% endif %}
-                <a href='#' data-trigger="dropdown2"><img id="bell" src="/static/bell.png"></a>
+                <a  data-trigger="dropdown2"><img id="bell" src="/static/bell.png"></a>
             </div>
         </div>
         <div class="profile_trigger_dropdown">
@@ -25,11 +25,16 @@
         </div>
         <div class="profile_trigger_dropdown2">
             <h2>Notifications</h2>
+            {% set message_id_list = [] %}
             <div class="new">
                 <h4>New</h4>
                 {% if new is defined %}
                 {% for msg in new %}
-                <a attribute href='#'>{{ msg.message }}</a>
+                {% if msg.status == "clicked" %}
+                <a>{{ msg.message }}</a>
+                {% else %}
+                <a id='message_idd' data-message-id={{ msg.message_id }}>{{ msg.message }}<span class="blue"></span></a>
+                {% endif %} 
                 {% endfor %}
                 {% endif %}
             </div>
@@ -37,7 +42,11 @@
                 <h4>Earlier</h4>
                 {% if old is defined %}
                 {% for msg in old %}
-                <a href='#'>{{ msg.message }}</a>
+                {% if msg.status == "clicked" %}
+                <a>{{ msg.message }}</a>
+                {% else %}
+                <a id='message_idd' data-message-id={{ msg.message_id }}>{{ msg.message }}<span class="blue"></span></a>
+                {% endif %} 
                 {% endfor %}
                 {% endif %}
             </div>

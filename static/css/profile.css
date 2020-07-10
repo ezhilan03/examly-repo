@@ -90,13 +90,14 @@
 .profile_trigger_dropdown2 > div > a{
     text-decoration: none;
     font-size: medium;
-    display: block;
+    display: inline-table;
     color: #333;
     text-shadow: none;
-    margin: 5px 0px;
+    margin: 0px 0px;
     padding: 10px 0px;
     height: 22px;
     padding-left: 10px;
+    width: 325px;
 }
 .profile_trigger_dropdown2 > div > a:hover{
     background:#f5fdff;
@@ -121,6 +122,29 @@
     color: #fff;
     padding: 3px 6px;
     border-radius: 20px;
+}
+
+.profile_trigger_dropdown2 > div > a > span{
+    content: " ";
+    display: inline;
+    position: relative;
+    background: #37a3f0;
+    height: 10px;
+    width: 10px;
+    float: right;
+    margin-right: 20px;
+    margin-top: 2.4px;
+    border-radius: 10px;
+}
+
+.profile_trigger_dropdown2 > div > a > p{
+    display: inline-block;
+    margin: auto;
+    width: 300px;
+}
+
+#user:hover, #bell:hover, .new > a, .older > a{
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar {

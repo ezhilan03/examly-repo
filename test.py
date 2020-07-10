@@ -7,6 +7,7 @@ import jinja2
 from datetime import date 
 import datetime
 import uuid
+import random
 
 actualdate = datetime.datetime.now()
 today=actualdate.strftime("%d-%m-%Y")
@@ -19,15 +20,24 @@ db=connection.examly
 user_collection1=db.user_master
 user_collection2=db.notification_master
 user_collection3=db.user_course_relation
+
 @app.route('/')
 def index_show():
    return render_template('login.html')
 
-@app.route('/postmethod', methods = ['POST'])
+@app.route('/unread_to_read', methods = ['POST'])
 def get_post_javascript_data():
-   jsdata = request.form['javascript_data']
-   
-   return jsdata
+   if(request.method == 'POST'):
+      jsdata = request.form['javascript_data']
+      user_collection2.update_many({'user_id':username,'status':'unread'},{"$set":{'status':'read'}})
+      return jsdata
+
+@app.route('/to_clicked', methods = ['POST'])
+def get_post_javascript_data2():
+   if(request.method == 'POST'):
+      jsdata = request.form['javascript_data']
+      user_collection2.update({'message_id':jsdata},{"$set":{'status':'clicked'}})
+      return jsdata
 
 @app.route('/apicall1',methods=['GET','POST'])
 def call1():
@@ -35,8 +45,7 @@ def call1():
       some_json = request.get_json()
       course_name=some_json['course_name']
       for student_id in some_json['student_id_list']:
-         user_collection3.update({'user_id':student_id,'course_name':course_name},{'user_id':student_id,'course_name':course_name},upsert=True)
-         message_id=uuid.uuid1()
+         message_id=str(uuid.uuid1())
          user_collection2.insert_one({'user_id':student_id,'message_id':message_id,'message':course_name+' course is available','status':'unread','create_time':time,'create_date':today})
       return "updated successfully"
 
@@ -47,14 +56,16 @@ def call1():
 def call2():
    if(request.method=='POST'):
       some_json = request.get_json()
-      class_name=some_json['class_name']
+      class_name1=some_json['class_name']
+      class_name=class_name1.upper()
       message_list=some_json['message_list']
+      staff_name=some_json['staff_name']
       students_given_class=list(user_collection1.find({'class_name':class_name},{'user_id':1}))
       for student_given_class in students_given_class:
          student_given_class_id = student_given_class['user_id']
          for msg in message_list:
-            message_id=uuid.uuid1()
-            user_collection2.insert_one({'user_id':student_given_class_id,'message_id':message_id,'message':msg,'status':'unread','create_time':time,'create_date':today})
+            message_id=str(uuid.uuid1())
+            user_collection2.insert_one({'user_id':student_given_class_id,'message_id':message_id,'message':staff_name+' : '+msg,'status':'unread','create_time':time,'create_date':today})
       return "updated successfully"
 
 @app.route('/apicall3',methods=['GET','POST'])
@@ -64,15 +75,28 @@ def call3():
       user_id=some_json['user_id']
       user_name=user_collection1.find_one({'user_id':user_id},{'name':1}) 
       friend_id_list=some_json['friend_id_list']
-      course_name=some_json['course_name']
+      course_name1=some_json['course_name']
+      course_name=course_name1.capitalize()
       for friend_id in friend_id_list:
-         message_id=uuid.uuid1()
+         message_id=str(uuid.uuid1())
          user_collection2.insert_one({'user_id':friend_id,'message_id':message_id,'message':'Your friend '+user_name['name']+' has completed the '+course_name+' course','status':'unread','create_time':time,'create_date':today})
 
       return "updated successfully"
 
+@app.route('/apicall4',methods=['GET','POST'])
+def call4():
+   if(request.method=='POST'):
+      some_json = request.get_json()
+      course_name1=some_json['course_name']
+      course_name=course_name1.capitalize()
+      remainder_id_list=list(user_collection3.find({'course_name':course_name}))
+      for remainder_id in remainder_id_list:
+         message_id=str(uuid.uuid1())
+         user_collection2.insert_one({'user_id':remainder_id['user_id'],'message_id':message_id,'message':'The '+course_name+' course you enrolled is about to start','status':'unread','create_time':time,'create_date':today})
+      return "updated successfully"
 @app.route('/profile', methods = ['POST','GET'])
 def login():
+   global username
    username = request.form['rid']
    password = request.form['pass']
    
@@ -85,10 +109,10 @@ def login():
          expecteddate=msg['create_date']
          if today > expecteddate:
             old.append(msg)
-            old=old[::-1]
          else:
             new.append(msg)
-            new=new[::-1]
+      new=new[::-1]
+      old=old[::-1]    
       return render_template('profile.html',detail=detail,old=old,new=new,unread_count=unread_count)
    else:
       return "Invalid credentials"

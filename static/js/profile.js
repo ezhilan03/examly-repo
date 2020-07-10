@@ -1,23 +1,49 @@
 $(document).ready(function(){
+    var dropdown1_flag = 0;
+    var dropdown2_flag = 0;
     $('[data-trigger="dropdown1"]').on('click',function(){
-        $('.profile_trigger_dropdown').addClass('active');
-
-        $('[data-trigger="dropdown1"]').on('click',function(){
+        if(dropdown1_flag==0){
+            $('.profile_trigger_dropdown').addClass('active');
+            dropdown1_flag=1;
+        }
+        else if(dropdown1_flag==1){
             $('.profile_trigger_dropdown').removeClass('active');
-        });
+            dropdown1_flag=0;
+        }
     });
 
-    $('[data-trigger="dropdown2"]').on('focusin',function(){
-        $('.profile_trigger_dropdown2').addClass('active');     
-        $('[data-trigger="dropdown2"]').on('focusout',function(){
+    $('[data-trigger="dropdown2"]').on('click',function(){
+        if(dropdown2_flag==0){
+            $('.profile_trigger_dropdown2').addClass('active');
+            dropdown2_flag=1;
+        }
+        else if(dropdown2_flag==1){
             $('.profile_trigger_dropdown2').removeClass('active');
-        });
+            dropdown2_flag=0;
+        }
     });
 
     $('[data-trigger="dropdown2"]').on('click',function(event){
-        $('.unread_count').remove();
-        $.post( "/postmethod", {
-            javascript_data: 'yes'
-        });
+        if($('.unread_count')['length'] > 0){
+            $('.unread_count').remove();
+            $.post( "/unread_to_read", {
+                javascript_data: 1
+            });
+        }
+
+    });
+
+    $('.new a').on('click',function(event){
+        $(this).find("span").remove();
+        $.post( "/to_clicked", {
+            javascript_data: $(this).data('message-id')
+        }); 
+    });
+
+    $('.older a').on('click',function(event){
+        $(this).find("span").remove();
+        $.post( "/to_clicked", {
+            javascript_data: $(this).data('message-id')
+        }); 
     });
 });
