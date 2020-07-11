@@ -4,17 +4,27 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/static/css/login.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="/static/js/login.js"></script>
         <title>Login page</title>
     </head>
 
     <body>
         <div class='main'>
             <img src="/static/712c8bd313c2ed09676eb25b4d504b0a.png">
-            <div class="details">
-                <form method="POST" action="{{ url_for('login') }}">
-                    <div class="row">register-id:<input type="text" name="rid"></div>
-                    <div class="row">password: <input type="password" name="pass"></div>
-                    <input type="submit" name="submit">
+            <div class="form-main">
+                <form method="POST" action="{{ url_for('login2') }}">
+                    <div class="wrap-input100 validate-input m-t-85 m-b-35 " data-validate = "Enter user-id">
+                        <input class="input100" type="text" name="rid">
+                        <span class="focus-input100" data-placeholder="User-id"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password"">
+                        <input class="input100" type="password" name="pass">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+                    <div class="container-login100-form-btn">
+						<input class="login100-form-btn" type="Submit" name="Login"></input>
+					</div>
                 </form>
             </div>
         </div>

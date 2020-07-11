@@ -34,16 +34,21 @@ $(document).ready(function(){
     });
 
     $('.new a').on('click',function(event){
-        $(this).find("span").remove();
-        $.post( "/to_clicked", {
-            javascript_data: $(this).data('message-id')
-        }); 
+        if($(this).find("span").length==1){
+            $(this).find("span").remove();
+            $.post( "/to_clicked", {
+                javascript_data: $(this).data('message-id')
+            }); 
+        }
+    
     });
 
     $('.older a').on('click',function(event){
-        $(this).find("span").remove();
-        $.post( "/to_clicked", {
-            javascript_data: $(this).data('message-id')
-        }); 
+        if($(this).find("span").length==1){
+            $(this).find("span").remove();
+            $.post( "/to_clicked", {
+                javascript_data: $(this).data('message-id')
+            }); 
+        }
     });
 });

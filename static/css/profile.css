@@ -40,7 +40,7 @@
 .profile_details{
     width:200px;
     margin:auto;
-    margin-top:30px;
+    margin-top:50px;
 }
 .profile_details > p {
     margin:10px;
@@ -158,4 +158,11 @@
     background: #cccaca;
     outline: 1px solid slategrey;
     border-radius: 10px; 
+}
+.details > p{
+    letter-spacing: 0.6px;
+}
+.details{
+    margin-left: 20px;
+    margin-top: 30px;
 }

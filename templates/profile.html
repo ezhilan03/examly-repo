@@ -11,7 +11,7 @@
 
     <body>
         <div class="topnav">
-            <a><img id="logo" src="static/logo.png"></a>
+            <a><img id="logo" src="/static/712c8bd313c2ed09676eb25b4d504b0a.png"></a>
             <div>
                 <a  data-trigger="dropdown1"><img id="user" src="/static/user.png"></a>
                 {% if unread_count>0 %}
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="profile_trigger_dropdown">
-            <a href="{{ url_for('index_show')  }}">Log out </a>
+            <a href="{{ url_for('logout')  }}">Log out </a>
         </div>
         <div class="profile_trigger_dropdown2">
             <h2>Notifications</h2>
@@ -53,11 +53,13 @@
         </div>
         <div class="profile_details">
             <img src="/static/person4.png">
-            <p>Name:  {{ detail['name'] }}</p>
-            <p>Userid:  {{ detail['user_id'] }}</p>
-            <p>College:  {{ detail['college'] }}</p>
-            <p>Class:  {{ detail['class_name'] }}</p>
-            <p>cgpa:  {{ detail['cgpa'] }}</p>
+            <div class="details">
+                <p>Name:  {{ detail['name'] }}</p>
+                <p>Userid:  {{ detail['user_id'] }}</p>
+                <p>College:  {{ detail['college'] }}</p>
+                <p>Class:  {{ detail['class_name'] }}</p>
+                <p>cgpa:  {{ detail['cgpa'] }}</p>
+            </div>
         </div>
     </body>
 </html>
