@@ -19,7 +19,7 @@ time = actualdate.strftime("%H-%M-%S")
 
 app=Flask("__name__")
 key=uuid.uuid4().hex
-app.secret_key = "a2f5019845144d9f80f585d3faaaa419"
+app.secret_key = key
 connection=MongoClient("mongodb+srv://admin:admin@cluster0.uvdng.mongodb.net/examly?retryWrites=true&w=majority")
 db=connection.examly
 user_collection1=db.user_master
@@ -28,6 +28,7 @@ user_collection3=db.user_course_relation
 
 @app.route('/')
 def index_show():
+   session.clear()
    return render_template('login.html')
 
 @app.route('/unread_to_read', methods = ['POST'])
@@ -119,7 +120,7 @@ def call4():
 @app.route('/profile', methods = ['POST','GET'])
 def login():
    var2=session.get('logged_in')
-   if(var2 and session['logged_in']==True):
+   if(var2):
       
       if(user_collection1.find({'user_id': username,'password':password}).count()>0):
          detail=user_collection1.find_one({'user_id':username})
@@ -143,7 +144,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-   session['logged_in']=False
+   session.clear()
    return redirect('/')
 
 @app.route('/login2', methods = ['POST','GET'])
