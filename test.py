@@ -19,7 +19,7 @@ time = actualdate.strftime("%H-%M-%S")
 
 app=Flask("__name__")
 key=uuid.uuid4().hex
-app.secret_key = key
+app.secret_key = "a2f5019845144d9f80f585d3faaaa419"
 connection=MongoClient("mongodb+srv://admin:admin@cluster0.uvdng.mongodb.net/examly?retryWrites=true&w=majority")
 db=connection.examly
 user_collection1=db.user_master
@@ -118,7 +118,8 @@ def call4():
       return "updated successfully"
 @app.route('/profile', methods = ['POST','GET'])
 def login():
-   if(session['logged_in']==True):
+   var2=session.get('logged_in')
+   if(var2 and session['logged_in']==True):
       
       if(user_collection1.find({'user_id': username,'password':password}).count()>0):
          detail=user_collection1.find_one({'user_id':username})
