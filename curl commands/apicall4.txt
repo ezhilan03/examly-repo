@@ -1,1 +1,1 @@
-curl -X POST -H "Content-Type: application/json" -d "{\"course_name\":\"C\"}"  http://127.0.0.1:5000/apicall4
+curl -X POST -H "Content-Type: application/json" -d "{\"course_name\":\"C\"}"  https://notification--system.herokuapp.com/apicall4

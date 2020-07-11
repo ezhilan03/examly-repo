@@ -25,9 +25,10 @@ $(document).ready(function(){
 
     $('[data-trigger="dropdown2"]').on('click',function(event){
         if($('.unread_count')['length'] > 0){
+            var name_value = $('.name_value').html();
             $('.unread_count').remove();
             $.post( "/unread_to_read", {
-                javascript_data: 1
+                javascript_data: name_value
             });
         }
 
