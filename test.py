@@ -118,7 +118,8 @@ def call4():
       return "updated successfully"
 @app.route('/profile', methods = ['POST','GET'])
 def login():
-   
+   username = request.form['rid']
+   password = request.form['pass']
    if(user_collection1.find({'user_id': username,'password':password}).count()>0):
       detail=user_collection1.find_one({'user_id':username})
       detail2=user_collection2.find({'user_id':username})
@@ -141,14 +142,7 @@ def logout():
    
    return redirect('/')
 
-@app.route('/login2', methods = ['POST','GET'])
-def login2():
-   global username
-   global password
-   username = request.form['rid']
-   password = request.form['pass']
-   
-   return redirect('/profile')
+
 
 @app.errorhandler(404)
 def page_not_found(e):
