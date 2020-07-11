@@ -12,7 +12,7 @@ I have imported the following modules:
 * default_timer to find the run time of second apicall which sends multiple messages to multiple users. 
 
 # Code
-- First it calculates the date and time and store it in variables
+- First it calculates the current date and time and store it in variables
 - Then a Flask object is created.
 - Connection is made to the Mongodb server and the collections in the database in given to variables.
 - Code contains a total of 9 functions.
@@ -22,9 +22,9 @@ It is routed to the home page and it renders the login.html file
 ### get_post_javascript_data():
 This function is called when any "read but not clicked" notification is clicked. The profile.js file returns the message_id so this function updates the notification's status to "clicked".
 ### call1:
-This function is for the api call to trigger Notification type 1. It gets the course_name and student_id_list and loops through the list to crate notification document with message_id generated randomly each time. Instead of inserting one document at a time we append all the documents in an empty list and did insert_many.
+This function is for the api call to trigger Notification type 1. It gets the course_name and student_id_list and loops through the list to create notification document with message_id generated randomly each time. Instead of inserting one document at a time we append all the documents in an empty list and did insert_many.
 ### call2:
-This function is for the api call to trigger Notification type 2.It gets the class_name, message_list and staff_name and find the list of students who belongs to the given class_name. First a for loop for the message_list and for each message an empty list is created and then a loop for the students list within which we generate notifocation document with unique message_id is appended into apicall2_list. And the end of the first loop the list of documents is inserted into database which is quite optimal solution without doing a large number of inserts and not getting Memory error. The number of notifications is calculated and the running time is calculated from subtracting end time and start time are returned.
+This function is for the api call to trigger Notification type 2.It gets the class_name, message_list and staff_name and find the list of students who belongs to the given class_name. First a for loop for the message_list and for each message an empty list is created and then a loop for the students list within which we generate notification document with unique message_id is appended into apicall2_list.  At the end of the first loop the list of documents is inserted into database which is quite optimal solution compared to doing a large number of inserts or storing all the data into a variable which leads to getting Memory error. The number of notifications is calculated and the running time is calculated from subtracting end time and start time are returned.
 ### call3:
 This function is for the api call to trigger Notification type 3. It gets the user_id, friend_id_list and course_name and finds the name of the user using user_id. Loops through the list of friend ids and append a message with unique message_id to an empty list. the list of documents is inserted using insert_many.
 ### call4:
